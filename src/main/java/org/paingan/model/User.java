@@ -2,62 +2,129 @@ package org.paingan.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.paingan.model.Role;
 
 @Entity
-@Table(name = "user_oauth")
-public class User {
+@Table(name = "user")
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
-    @Column
-    private String username;
-    @Column
-    @JsonIgnore
-    private String password;
-    @Column
-    private long salary;
-    @Column
-    private int age;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
+	//@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an username")
+	private String username;
+	
+	//@JsonIgnore
+    @NotNull
+	@Length(min = 5, message = "*Your password must have at least 5 characters")
+	@NotEmpty(message = "*Please provide your password")
+	private String password;
+	
+	private int active = 1;
+	
+	private String firstname;
+	
+	private String lastname;
+	
+	@JsonIgnore
+	private String email;
+	
+	@JsonIgnore
+	private String phone;
+	
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
+	
+//	public UserAccount() {
+//	}
+//	
+//	public UserAccount(String username, String password) {
+//		this.username = username;
+//		this.password = password;
+//	}
 
-    public long getId() {
-        return id;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public String getUsername() {
-        return username;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public long getSalary() {
-        return salary;
-    }
-
-    public void setSalary(long salary) {
-        this.salary = salary;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 }
