@@ -48,14 +48,6 @@ public class User implements Serializable{
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 	
-//	public UserAccount() {
-//	}
-//	
-//	public UserAccount(String username, String password) {
-//		this.username = username;
-//		this.password = password;
-//	}
-
 	public int getId() {
 		return id;
 	}
