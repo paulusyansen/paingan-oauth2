@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value="/user", method = RequestMethod.GET)
-    public List listUser(){
+    public List<User> listUser(){
         return userService.findAll();
     }
 
