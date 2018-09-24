@@ -58,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api-docs/**").permitAll();
         
 //        http.authorizeRequests().anyRequest().authenticated();
+    	
+//    	http.authorizeRequests().anyRequest().permitAll();
     }
     
     @Override
