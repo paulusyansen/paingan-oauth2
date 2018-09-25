@@ -1,4 +1,4 @@
-package org.paingan.model;
+package org.paingan.oauth2.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

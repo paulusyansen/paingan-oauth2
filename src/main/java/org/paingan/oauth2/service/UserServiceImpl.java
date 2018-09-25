@@ -1,11 +1,11 @@
-package org.paingan.service;
+package org.paingan.oauth2.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.paingan.dao.UserDao;
-import org.paingan.model.User;
+import org.paingan.oauth2.dao.UserDao;
+import org.paingan.oauth2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

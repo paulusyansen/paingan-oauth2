@@ -1,0 +1,46 @@
+server:
+  port: ${server.port}
+  
+spring:
+  application:
+    name: paingan-oauth2
+  datasource:
+    url: jdbc:h2:mem:oauthdb
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    locator:
+      discovery:
+        enabled: true
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8900/eureka/
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 100
+    metadata-map:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

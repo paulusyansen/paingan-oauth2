@@ -51,13 +51,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		
 		configurer
-				.inMemory()
-				.withClient(CLIENT_ID)
-				.secret(bCryptPasswordEncoder.encode(CLIENT_SECRET))
-				.authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
-				.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-				.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
-				refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
+			.inMemory()
+			.withClient(CLIENT_ID)
+			.secret(bCryptPasswordEncoder.encode(CLIENT_SECRET))
+			.authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
+			.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+			.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
+			refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
 	}
 
 	@Override

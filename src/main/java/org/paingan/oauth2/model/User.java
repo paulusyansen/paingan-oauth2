@@ -1,4 +1,4 @@
-package org.paingan.model;
+package org.paingan.oauth2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.paingan.model.Role;
+import org.paingan.oauth2.model.Role;
 
 @Entity
 @Table(name = "user")
