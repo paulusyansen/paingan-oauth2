@@ -2,6 +2,7 @@ package org.paingan.oauth2.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.paingan.oauth2.model.User;
 import org.paingan.oauth2.service.UserService;
@@ -38,6 +39,12 @@ public class UserController {
     public String delete(@PathVariable(value = "id") Long id){
         userService.delete(id);
         return "success";
+    }
+    
+    @GetMapping(value = "/user/{id}")
+    public User findById(@PathVariable(value = "id") Long id){
+        Optional<User> user = userService.findById(id);
+        return user.get();
     }
     
     @GetMapping(value = "/user/authenticate")

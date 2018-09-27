@@ -2,6 +2,7 @@ package org.paingan.oauth2.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.paingan.oauth2.dao.UserDao;
@@ -41,6 +42,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		List<User> list = new ArrayList<>();
 		userDao.findAll().iterator().forEachRemaining(list::add);
 		return list;
+	}
+	
+	public Optional<User> findById(Long id) {
+		return userDao.findById(id);
 	}
 
 	@Override
