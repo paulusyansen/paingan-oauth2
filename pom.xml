@@ -154,7 +154,12 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>2.7.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
 <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>

@@ -57,7 +57,7 @@ public class SwaggerConfiguration {
 	private ApiInfo apiInfo() {
 	     return new ApiInfo(
 	       "Api Documentation", 
-	       "[paingan-oauth2]", 
+	       "[paingan-microservices]", 
 	       "v1.0", 
 	       "Terms of service", 
 	       new Contact("Paulus Yansen", "http://www.github.com/paulusyansen", "paulus.yansen@gmail.com"), 
@@ -66,9 +66,9 @@ public class SwaggerConfiguration {
 	
 	private SecurityScheme securityScheme() {
 	    GrantType grantType = new AuthorizationCodeGrantBuilder()
-	        .tokenEndpoint(new TokenEndpoint("/token", "oauthtoken"))
+	        .tokenEndpoint(new TokenEndpoint("http://localhost:8700/uaa/oauth/token", "access_token"))
 	        .tokenRequestEndpoint(
-	          new TokenRequestEndpoint("/authorize", AuthorizationServerConfig.CLIENT_ID, AuthorizationServerConfig.CLIENT_ID))
+	          new TokenRequestEndpoint("http://localhost:8700/uaa/oauth/authorize", "paingan-client", "paingan-secret"))
 	        .build();
 	 
 	    SecurityScheme oauth = new OAuthBuilder().name("spring_oauth")
@@ -82,7 +82,7 @@ public class SwaggerConfiguration {
 	    return SecurityContext.builder()
 	      .securityReferences(
 	        Arrays.asList(new SecurityReference("spring_oauth", scopes())))
-	      .forPaths(PathSelectors.regex("/*"))
+	      .forPaths(PathSelectors.regex("/auth(/.*)?"))
 	      .build();
 	}
 	
@@ -90,17 +90,7 @@ public class SwaggerConfiguration {
 	    AuthorizationScope[] scopes = { 
 	      new AuthorizationScope("read", "for read operations"), 
 	      new AuthorizationScope("write", "for write operations"), 
-	      new AuthorizationScope("foo", "Access foo API") };
+	      new AuthorizationScope("trust", "Access API") };
 	    return scopes;
 	}
-	
-//	@Bean
-//	public SecurityConfiguration security() {
-//	    return SecurityConfigurationBuilder.builder()
-//	        .clientId(CLIENT_ID)
-//	        .clientSecret(CLIENT_SECRET)
-//	        .scopeSeparator(" ")
-//	        .useBasicAuthenticationWithAccessCodeGrant(true)
-//	        .build();
-//	}
 }

@@ -1,19 +1,32 @@
-server:
-  port: ${server.port}
-  
 spring:
   application:
     name: paingan-oauth2
   datasource:
-    url: jdbc:h2:mem:oauthdb
+    url: jdbc:h2:file:~/orderdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    hikari:
+#      connection-timeout: 60000
+#      maximum-pool-size: 20
+#    password: deploypw
+#    url: jdbc:mysql://172.18.186.21:3306/test?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+#    username: deployadmin
+ 
   h2:
     console:
       enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+    
   rabbitmq:
     host: localhost
     port: 5672
@@ -27,6 +40,13 @@ spring:
     locator:
       discovery:
         enabled: true
+
+logging:
+  level:
+    org.hibernate.stat: debug
+    org.hibernate.type: trace
+    org.springframework.security: debug
+
 
 eureka:
   client:

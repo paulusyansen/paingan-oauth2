@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         try {
         	auth
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
+                .passwordEncoder(passwordEncoder());
         	
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
@@ -51,15 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .anonymous().disable()
-//                .authorizeRequests()
-//                .antMatchers("/api-docs/**").permitAll();
+        http
+                .csrf().disable()
+                .anonymous().disable()
+                .authorizeRequests()
+                .antMatchers("/api-docs/**").permitAll();
         
-        http.authorizeRequests().anyRequest().authenticated();
-    	
+//        http.authorizeRequests().anyRequest().authenticated();
+//    	
 //    	http.authorizeRequests().anyRequest().permitAll();
+//    	
+    	http.headers().frameOptions().disable(); //h2-console enable jdbc-url: jdbc:h2:mem:testdb
+    	http.headers().frameOptions().sameOrigin(); //h2-console enable
     }
     
     @Override
@@ -68,9 +71,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder encoder(){
+    public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+    
 
 //    @Bean
 //    public FilterRegistrationBean<CorsFilter> corsFilter() {
