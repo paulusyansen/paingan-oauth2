@@ -50,18 +50,19 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
      .and()
          .authorizeRequests()
-         .antMatchers("/api/register").permitAll()
-         .antMatchers("/api/activate").permitAll()
-         .antMatchers("/api/authenticate").permitAll()
-         .antMatchers("/api/account/reset-password/init").permitAll()
-         .antMatchers("/api/account/reset-password/finish").permitAll()
-         .antMatchers("/api/profile-info").permitAll()
-         .antMatchers("/api/**").authenticated()
-         .antMatchers("/management/health").permitAll()
-         .antMatchers("/management/**").hasAuthority("ROLE_ADMIN")
-         .antMatchers("/v2/api-docs/**").permitAll()
-         .antMatchers("/swagger-resources/configuration/ui").permitAll()
-         .antMatchers("/swagger-ui/index.html").hasAuthority("ROLE_ADMIN");
+         .antMatchers("/**").permitAll();
+//         .antMatchers("/api/register").permitAll()
+//         .antMatchers("/api/activate").permitAll()
+//         .antMatchers("/api/authenticate").permitAll()
+//         .antMatchers("/api/account/reset-password/init").permitAll()
+//         .antMatchers("/api/account/reset-password/finish").permitAll()
+//         .antMatchers("/api/profile-info").permitAll()
+//         .antMatchers("/api/**").authenticated()
+//         .antMatchers("/management/health").permitAll()
+//         .antMatchers("/management/**").hasAuthority("ROLE_ADMIN")
+//         .antMatchers("/v2/api-docs/**").permitAll()
+//         .antMatchers("/swagger-resources/configuration/ui").permitAll()
+//         .antMatchers("/swagger-ui/index.html").hasAuthority("ROLE_ADMIN");
 		 
 //        http
 //        	.anonymous().disable()
